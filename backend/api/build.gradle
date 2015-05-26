@@ -1,12 +1,6 @@
 dependencies {
-    compile project(":nextbuild-backend-api")
-
     compile 'org.springframework:spring-beans'
     compile deps['spring-context-support']
     compile deps['spring-boot-starter-actuator']
     compile deps['spring-boot-starter-data-jpa']
-
-    compile deps['quartz']
-    compile deps['axon-core']
-    testCompile deps['axon-test']
 }

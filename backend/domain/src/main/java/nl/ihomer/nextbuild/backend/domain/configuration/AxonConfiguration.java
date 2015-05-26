@@ -82,7 +82,7 @@ public class AxonConfiguration {
 
     @Bean
     public ClusterSelector clusterSelector(Cluster replayingCluster){
-        Map<String, Cluster> mapping = Collections.singletonMap("nl.ihomer.nextbuild.view.handlers.view", replayingCluster);
+        Map<String, Cluster> mapping = Collections.singletonMap("nl.ihomer.nextbuild.backend.view.handlers", replayingCluster);
         return new ClassNamePrefixClusterSelector(mapping, new SimpleCluster("Default"));
     }
 
@@ -141,28 +141,28 @@ public class AxonConfiguration {
         return commandHandler;
     }
 
-    @Bean
-    public SchedulerFactoryBean schedulerFactoryBean(DataSource dataSource){
-        SchedulerFactoryBean schedulerFactoryBean = new SchedulerFactoryBean();
-        schedulerFactoryBean.setDataSource(dataSource);
-        Properties properties = new Properties();
-        properties.put("org.quartz.jobStore.class", "org.quartz.impl.jdbcjobstore.JobStoreTX");
-        schedulerFactoryBean.setQuartzProperties(properties);
-        return schedulerFactoryBean;
-    }
-
-    @Bean
-    public Scheduler scheduler(SchedulerFactoryBean schedulerFactoryBean) throws SchedulerException {
-        return schedulerFactoryBean.getScheduler();
-    }
-
-    @Bean
-    public EventScheduler eventScheduler(SpringTransactionManager springTransactionManager, EventBus eventBus, Scheduler scheduler) throws SchedulerException {
-        QuartzEventScheduler eventScheduler = new QuartzEventScheduler();
-        eventScheduler.setEventBus(eventBus);
-        eventScheduler.setTransactionManager(springTransactionManager);
-        eventScheduler.setScheduler(scheduler);
-        eventScheduler.initialize();
-        return eventScheduler;
-    }
+//    @Bean
+//    public SchedulerFactoryBean schedulerFactoryBean(DataSource dataSource){
+//        SchedulerFactoryBean schedulerFactoryBean = new SchedulerFactoryBean();
+//        schedulerFactoryBean.setDataSource(dataSource);
+//        Properties properties = new Properties();
+//        properties.put("org.quartz.jobStore.class", "org.quartz.impl.jdbcjobstore.JobStoreTX");
+//        schedulerFactoryBean.setQuartzProperties(properties);
+//        return schedulerFactoryBean;
+//    }
+//
+//    @Bean
+//    public Scheduler scheduler(SchedulerFactoryBean schedulerFactoryBean) throws SchedulerException {
+//        return schedulerFactoryBean.getScheduler();
+//    }
+//
+//    @Bean
+//    public EventScheduler eventScheduler(SpringTransactionManager springTransactionManager, EventBus eventBus, Scheduler scheduler) throws SchedulerException {
+//        QuartzEventScheduler eventScheduler = new QuartzEventScheduler();
+//        eventScheduler.setEventBus(eventBus);
+//        eventScheduler.setTransactionManager(springTransactionManager);
+//        eventScheduler.setScheduler(scheduler);
+//        eventScheduler.initialize();
+//        return eventScheduler;
+//    }
 }

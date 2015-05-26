@@ -1,6 +1,13 @@
 rootProject.name = 'nextbuild-backend'
 
+include 'nextbuild-backend-application'
+include 'nextbuild-backend-api'
+include 'nextbuild-backend-api-rest'
 include 'nextbuild-backend-domain'
+include 'nextbuild-backend-view-model'
 
-def domain = new File(rootDir, 'domain')
-project(':nextbuild-backend-domain').projectDir = new File(domain, '')
+project(':nextbuild-backend-application').projectDir = new File(rootDir, 'app')
+project(':nextbuild-backend-api').projectDir = new File(rootDir, 'api')
+project(':nextbuild-backend-api-rest').projectDir = new File(rootDir, 'api-rest')
+project(':nextbuild-backend-domain').projectDir = new File(rootDir, 'domain')
+project(':nextbuild-backend-view-model').projectDir = new File(rootDir, 'view-model')

@@ -1,0 +1,16 @@
+## Development environment
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/nextbuild_cqrs
+    username: root
+    password: root
+    driverClassName: com.mysql.jdbc.Driver
+    testOnBorrow: true
+    validationQuery: SELECT 1
+
+  jpa.generate-ddl: true
+
+logging.level:
+  org.springframework.data: INFO
+  nl.ihomer.nextbuild: INFO
+  org.hibernate.SQL: INFO

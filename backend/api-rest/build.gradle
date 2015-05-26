@@ -1,0 +1,5 @@
+dependencies {
+    compile project(":nextbuild-backend-api")
+    compile deps['spring-boot-starter-actuator']
+    compile deps['spring-boot-starter-web']
+}

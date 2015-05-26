@@ -1,0 +1,10 @@
+server:
+  port: 8400
+
+endpoints.jmx.unique-names: true
+
+spring.jpa:
+  hibernate.naming_strategy: org.hibernate.cfg.EJB3NamingStrategy
+  show-sql: false
+  format_sql: true
+

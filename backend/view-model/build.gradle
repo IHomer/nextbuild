@@ -1,0 +1,15 @@
+dependencies {
+    compile project(":nextbuild-backend-api")
+    compile project(":nextbuild-backend-domain")
+
+    compile deps['spring-boot-starter-data-jpa']
+//    compile deps['spring-context-support']
+
+//    compile deps['axon-core']
+    compile deps['mysql']
+
+//    compile 'org.springframework:spring-beans'
+//    compile deps['spring-context-support']
+//    compile deps['spring-boot-starter-actuator']
+//    compile deps['spring-boot-starter-data-jpa']
+}

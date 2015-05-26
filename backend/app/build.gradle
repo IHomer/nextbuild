@@ -1,0 +1,16 @@
+bootRepackage {
+    enabled = true
+    mainClass = 'nl.ihomer.nextbuild.Application'
+}
+
+project.gradle.projectsEvaluated {
+    applicationDefaultJvmArgs = ["-Dspring.profiles.active=${project.gradle.startParameter.systemPropertiesArgs['spring.profiles.active']}"]
+}
+
+dependencies {
+    compile project(':nextbuild-backend-api-rest')
+    compile project(':nextbuild-backend-domain')
+    compile project(':nextbuild-backend-view-model')
+
+    runtime deps['mysql']
+}
