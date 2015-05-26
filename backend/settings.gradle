@@ -1,0 +1,6 @@
+rootProject.name = 'nextbuild-backend'
+
+include 'nextbuild-backend-domain'
+
+def domain = new File(rootDir, 'domain')
+project(':nextbuild-backend-domain').projectDir = new File(domain, '')

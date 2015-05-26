@@ -1,0 +1,22 @@
+# Created by https://www.gitignore.io
+
+### Vagrant ###
+.vagrant
+
+### Gradle ###
+.gradle
+build/
+
+# Ignore Gradle GUI config
+gradle-app.setting
+.gradletasknamecache
+
+data/
+
+.java-version
+
+### IntelliJ ###
+.idea
+*.iml
+
+**/src/generated/

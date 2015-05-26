@@ -1,0 +1,78 @@
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply from: './libraries.gradle'
+
+allprojects {
+    repositories {
+        jcenter()
+        mavenCentral()
+        mavenLocal()
+    }
+
+
+}
+
+buildscript {
+    repositories {
+        jcenter()
+        mavenCentral()
+        mavenLocal()
+    }
+    dependencies {
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:1.2.3.RELEASE"
+    }
+}
+
+ext {
+    group = 'nl.ihomer.nextbuild'
+    version = '0.0.1'
+
+    javaLanguageLevel = '1.8'
+}
+
+subprojects { subProject ->
+    apply plugin: 'eclipse'
+    apply plugin: 'idea'
+    apply plugin: 'java'
+    targetCompatibility = 1.8
+    sourceCompatibility = 1.8
+    compileJava.options.encoding = 'UTF-8'
+
+    apply plugin: 'spring-boot'
+    bootRepackage {
+        enabled = false
+    }
+
+    apply from: "${rootDir}/libraries.gradle"
+
+    dependencies {
+        compile deps['slf4j-api']
+        compile deps['jcl-over-slf4j']
+        compile deps['logback']
+        testCompile deps['spring-boot-starter-test']
+    }
+
+    configurations {
+        all*.exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+    }
+
+    test {
+        testLogging {
+            events "passed", "skipped", "failed"
+        }
+    }
+}
+
+idea {
+    project {
+        languageLevel = javaLanguageLevel
+
+    }
+    module {
+        name = "nextbuild-backend"
+    }
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.2.1'
+}

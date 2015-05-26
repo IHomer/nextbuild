@@ -1,0 +1,77 @@
+ext {
+    camelVersion = '2.14.0'
+
+    deps = [
+        'spring-boot-starter':          "org.springframework.boot:spring-boot-starter",
+        'spring-boot-starter-test':     "org.springframework.boot:spring-boot-starter-test",
+        'spring-boot-starter-web':      "org.springframework.boot:spring-boot-starter-web",
+        'spring-boot-starter-actuator': "org.springframework.boot:spring-boot-starter-actuator",
+        'spring-boot-starter-amqp':     "org.springframework.boot:spring-boot-starter-amqp",
+        'spring-boot-starter-data-jpa': "org.springframework.boot:spring-boot-starter-data-jpa",
+        'spring-boot-starter-security': "org.springframework.boot:spring-boot-starter-security",
+        'spring-boot-starter-ws':       "org.springframework.boot:spring-boot-starter-ws",
+
+        'spring-test':                  "org.springframework:spring-test",
+
+        'spring-security-oauth':        "org.springframework.security.oauth:spring-security-oauth:2.0.6.RELEASE",
+        'spring-security-oauth2':       "org.springframework.security.oauth:spring-security-oauth2:2.0.5.RELEASE",
+        'spring-ws-core':			    "org.springframework.ws:spring-ws-core",
+        'spring-jaxb':                  "org.springframework:spring-oxm",
+        'spring-data-commons':          "org.springframework.data:spring-data-commons:1.9.1.RELEASE",
+
+        'camel-core':                   "org.apache.camel:camel-core:$camelVersion",
+        'camel-test':                   "org.apache.camel:camel-test:$camelVersion",
+        'camel-http':                   "org.apache.camel:camel-http:$camelVersion",
+        'camel-jdbc':                   "org.apache.camel:camel-jdbc:$camelVersion",
+        'camel-quartz2':                "org.apache.camel:camel-quartz2:$camelVersion",
+        'camel-spring-javaconfig':      "org.apache.camel:camel-spring-javaconfig:$camelVersion",
+        'camel-spring-amqp':            "com.bluelock:camel-spring-amqp:1.6.3",
+
+        'apache-commons':               "org.apache.commons:commons-lang3:3.3.2",
+        'apache-httpcomponents':        "org.apache.httpcomponents:httpclient:4.3.6",
+
+        'hibernate-jpa-2.1':            "org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.0.Final",
+        'hibernate-jpamodelgen':        "org.hibernate:hibernate-jpamodelgen:4.3.8.Final",
+        'hibernate':        "org.hibernate:hibernate-core:4.3.8.Final",
+
+        'velocity':                     "org.apache.velocity:velocity:1.7",
+
+        'axon-core':                    "org.axonframework:axon-core:2.4",
+        'axon-test':                    "org.axonframework:axon-test:2.4",
+
+        'liquibase-core':               "org.liquibase:liquibase-core:3.3.2",
+
+        'quartz':                       "org.quartz-scheduler:quartz:2.2.1",
+
+        'xstream':                      "com.thoughtworks.xstream:xstream:1.4.6",
+
+        'joda-time':                    "joda-time:joda-time:2.3",
+
+        'slf4j-api':                    "org.slf4j:slf4j-api:1.7.7",
+        'slf4j-simple':                 "org.slf4j:slf4j-simple:1.7.7",
+        'jcl-over-slf4j':               "org.slf4j:jcl-over-slf4j:1.7.7",
+
+        'spring-context-support':       "org.springframework:spring-context-support",
+
+        'jackson-annotations':          "com.fasterxml.jackson.core:jackson-annotations:2.5.1",
+        'jackson-databind':             "com.fasterxml.jackson.core:jackson-databind:2.5.1",
+        'jackson-datatype-hibernate4': "com.fasterxml.jackson.datatype:jackson-datatype-hibernate4:2.5.1",
+        'jackson-datatype-jsr310':      "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.5.1",
+        'jackson-jsog':                 "com.voodoodyne.jackson.jsog:jackson-jsog:1.1",
+
+        'guava':                        "com.google.guava:guava:18.0",
+        'mail':                         "javax.mail:mail:1.4.7",
+        'mail-api':                     "javax.mail:javax.mail-api:1.5.2",
+        'junit':                        "junit:junit:4.11",
+        'mysql':                         "mysql:mysql-connector-java:5.1.34",
+
+        'ehcache':                      "net.sf.ehcache:ehcache:2.9.0",
+        'super-csv':                    "net.sf.supercsv:super-csv:2.2.1",
+        'httpclient':                   "org.apache.httpcomponents:httpclient:4.3.6",
+		'codecs':						"commons-codec:commons-codec:1.10",
+        'jsch':                         "com.jcraft:jsch:0.1.51",
+
+        'logback':                      "ch.qos.logback:logback-classic",
+        'wsdl4j':                       "wsdl4j:wsdl4j:1.6.1"
+    ]
+}
