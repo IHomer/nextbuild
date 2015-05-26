@@ -1,5 +1,6 @@
 package nl.ihomer.nextbuild.backend.domain.configuration;
 
+import nl.ihomer.nextbuild.backend.domain.ShoppingCart;
 import org.axonframework.commandhandling.CommandBus;
 import org.axonframework.commandhandling.CommandTargetResolver;
 import org.axonframework.commandhandling.SimpleCommandBus;
@@ -19,15 +20,7 @@ import org.axonframework.eventhandling.scheduling.quartz.QuartzEventScheduler;
 import org.axonframework.eventsourcing.EventSourcingRepository;
 import org.axonframework.eventstore.EventStore;
 import org.axonframework.eventstore.jpa.JpaEventStore;
-import org.axonframework.saga.GenericSagaFactory;
-import org.axonframework.saga.SagaFactory;
-import org.axonframework.saga.SagaManager;
-import org.axonframework.saga.SagaRepository;
-import org.axonframework.saga.annotation.AnnotatedSagaManager;
-import org.axonframework.saga.repository.jpa.JpaSagaRepository;
 import org.axonframework.saga.spring.SpringResourceInjector;
-import org.axonframework.serializer.xml.CompactDriver;
-import org.axonframework.serializer.xml.XStreamSerializer;
 import org.axonframework.unitofwork.SpringTransactionManager;
 import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
@@ -61,6 +54,16 @@ public class AxonConfiguration {
     }
 
     @Bean
+    public SpringResourceInjector springResourceInjector(){
+        return new SpringResourceInjector();
+    }
+
+    @Bean
+    public SpringBeanParameterResolverFactory springBeanParameterResolverFactory(){
+        return new SpringBeanParameterResolverFactory();
+    }
+
+    @Bean
     public CommandBus commandBus(SpringTransactionManager springTransactionManager) {
         SimpleCommandBus commandBus = new SimpleCommandBus();
         commandBus.setTransactionManager(springTransactionManager);
@@ -79,7 +82,7 @@ public class AxonConfiguration {
 
     @Bean
     public ClusterSelector clusterSelector(Cluster replayingCluster){
-        Map<String, Cluster> mapping = Collections.singletonMap("nl.zep.sharesadministration.view.handlers.view", replayingCluster);
+        Map<String, Cluster> mapping = Collections.singletonMap("nl.ihomer.nextbuild.view.handlers.view", replayingCluster);
         return new ClassNamePrefixClusterSelector(mapping, new SimpleCluster("Default"));
     }
 
@@ -107,130 +110,41 @@ public class AxonConfiguration {
         return provider;
     }
 
-//    @Bean
-//    public JpaEventStore eventStore(DataSource zepDataSource, EntityManagerProvider entityManagerProvider) throws SQLException {
-//        XStream xStream = new XStream(new CompactDriver());
-//        xStream.setMode(XStream.NO_REFERENCES);
-//        xStream.registerConverter(new DurationConverter());
-//        xStream.registerConverter(new LocalDateConverter());
-//        xStream.registerConverter(new LocalDateTimeConverter());
-//        xStream.registerConverter(new PeriodConverter());
-//        XStreamSerializer serializer = new XStreamSerializer(xStream);
-//        JpaEventStore jpaEventStore = new JpaEventStore(entityManagerProvider, serializer);
-//        jpaEventStore.setDataSource(zepDataSource);
-//        return jpaEventStore;
-//    }
-//
-//    @Bean
-//    public SpringResourceInjector springResourceInjector(){
-//        return new SpringResourceInjector();
-//    }
-//
-//    @Bean
-//    public SpringBeanParameterResolverFactory springBeanParameterResolverFactory(){
-//        return new SpringBeanParameterResolverFactory();
-//    }
-//
-//    @Bean
-//    public EventSourcingRepository<Share> shareRepository(EventBus eventBus, EventStore eventStore) {
-//        EventSourcingRepository<Share> repository = new EventSourcingRepository<>(Share.class, eventStore);
-//        repository.setEventBus(eventBus);
-//        return repository;
-//    }
-//
-//    @Bean
-//    public AggregateAnnotationCommandHandler<Share> shareCommandHandler(EventSourcingRepository<Share> shareRepository,
-//                                                                        SpringBeanParameterResolverFactory springBeanParameterResolverFactory,
-//                                                                        CommandBus commandBus) {
-//
-//        CommandTargetResolver commandTargetResolver =  new AnnotationCommandTargetResolver();
-//        AggregateAnnotationCommandHandler<Share> commandHandler = new AggregateAnnotationCommandHandler<>(
-//            Share.class,
-//            shareRepository,
-//            commandTargetResolver,
-//            springBeanParameterResolverFactory);
-//
-//        for (String supportedCommand : commandHandler.supportedCommands()) {
-//            commandBus.subscribe(supportedCommand, commandHandler);
-//        }
-//        return commandHandler;
-//    }
-//
-//    @Bean
-//    public EventSourcingRepository<Person> personRepository(EventBus eventBus, EventStore eventStore) {
-//        EventSourcingRepository<Person> repository = new EventSourcingRepository<>(Person.class, eventStore);
-//        repository.setEventBus(eventBus);
-//        return repository;
-//    }
-//
-//    @Bean
-//    public AggregateAnnotationCommandHandler<Person> personCommandHandler(EventSourcingRepository<Person> personRepository,
-//                                                                        SpringBeanParameterResolverFactory springBeanParameterResolverFactory,
-//                                                                        CommandBus commandBus) {
-//
-//        CommandTargetResolver commandTargetResolver =  new AnnotationCommandTargetResolver();
-//        AggregateAnnotationCommandHandler<Person> commandHandler = new AggregateAnnotationCommandHandler<>(
-//            Person.class,
-//            personRepository,
-//            commandTargetResolver,
-//            springBeanParameterResolverFactory);
-//
-//        for (String supportedCommand : commandHandler.supportedCommands()) {
-//            commandBus.subscribe(supportedCommand, commandHandler);
-//        }
-//        return commandHandler;
-//    }
-//
-//    @Bean
-//    public EventSourcingRepository<SalesProcess> salesProcessRepository(EventBus eventBus, EventStore eventStore) {
-//        EventSourcingRepository<SalesProcess> repository = new EventSourcingRepository<>(SalesProcess.class, eventStore);
-//        repository.setEventBus(eventBus);
-//        return repository;
-//    }
-//
-//    @Bean
-//    public AggregateAnnotationCommandHandler<SalesProcess> salesProcessCommandHandler(EventSourcingRepository<SalesProcess> salesProcessRepository,
-//                                                                        SpringBeanParameterResolverFactory springBeanParameterResolverFactory,
-//                                                                        CommandBus commandBus) {
-//
-//        CommandTargetResolver commandTargetResolver =  new AnnotationCommandTargetResolver();
-//        AggregateAnnotationCommandHandler<SalesProcess> commandHandler = new AggregateAnnotationCommandHandler<>(
-//            SalesProcess.class,
-//            salesProcessRepository,
-//            commandTargetResolver,
-//            springBeanParameterResolverFactory);
-//
-//        for (String supportedCommand : commandHandler.supportedCommands()) {
-//            commandBus.subscribe(supportedCommand, commandHandler);
-//        }
-//        return commandHandler;
-//    }
-//
-//    @Bean
-//    public SagaRepository sagaRepository(EntityManagerProvider entityManagerProvider, SpringResourceInjector springResourceInjector){
-//        JpaSagaRepository repository = new JpaSagaRepository(entityManagerProvider);
-//        repository.setResourceInjector(springResourceInjector);
-//        return repository;
-//    }
-//
-//    @Bean
-//    public SagaFactory sagaFactory(SpringResourceInjector springResourceInjector){
-//        GenericSagaFactory factory = new GenericSagaFactory();
-//        factory.setResourceInjector(springResourceInjector);
-//        return factory;
-//    }
-//
-//    @Bean
-//    public SagaManager sagaManager(SagaRepository sagaRepository, SagaFactory sagaFactory, EventBus eventBus) {
-//        AnnotatedSagaManager manager = new AnnotatedSagaManager(sagaRepository, sagaFactory, RegisterSalesProcessSaga.class, OpenAndCloseSalesProcessSaga.class, CompleteSalesProcessSaga.class);
-//        eventBus.subscribe(manager);
-//        return manager;
-//    }
+    @Bean
+    public JpaEventStore eventStore(DataSource dataSource, EntityManagerProvider entityManagerProvider) throws SQLException {
+        JpaEventStore jpaEventStore = new JpaEventStore(entityManagerProvider);
+        jpaEventStore.setDataSource(dataSource);
+        return jpaEventStore;
+    }
+    @Bean
+    public EventSourcingRepository<ShoppingCart> shoppingCartRepository(EventBus eventBus, EventStore eventStore) {
+        EventSourcingRepository<ShoppingCart> repository = new EventSourcingRepository<>(ShoppingCart.class, eventStore);
+        repository.setEventBus(eventBus);
+        return repository;
+    }
 
     @Bean
-    public SchedulerFactoryBean schedulerFactoryBean(DataSource zepDataSource){
+    public AggregateAnnotationCommandHandler<ShoppingCart> shoppingCartCommandHandler(EventSourcingRepository<ShoppingCart> shoppingCartRepository,
+                                                                        SpringBeanParameterResolverFactory springBeanParameterResolverFactory,
+                                                                        CommandBus commandBus) {
+
+        CommandTargetResolver commandTargetResolver =  new AnnotationCommandTargetResolver();
+        AggregateAnnotationCommandHandler<ShoppingCart> commandHandler = new AggregateAnnotationCommandHandler<>(
+                ShoppingCart.class,
+                shoppingCartRepository,
+                commandTargetResolver,
+                springBeanParameterResolverFactory);
+
+        for (String supportedCommand : commandHandler.supportedCommands()) {
+            commandBus.subscribe(supportedCommand, commandHandler);
+        }
+        return commandHandler;
+    }
+
+    @Bean
+    public SchedulerFactoryBean schedulerFactoryBean(DataSource dataSource){
         SchedulerFactoryBean schedulerFactoryBean = new SchedulerFactoryBean();
-        schedulerFactoryBean.setDataSource(zepDataSource);
+        schedulerFactoryBean.setDataSource(dataSource);
         Properties properties = new Properties();
         properties.put("org.quartz.jobStore.class", "org.quartz.impl.jdbcjobstore.JobStoreTX");
         schedulerFactoryBean.setQuartzProperties(properties);

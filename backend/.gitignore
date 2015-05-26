@@ -17,6 +17,6 @@ data/
 
 ### IntelliJ ###
 .idea
-*.iml
+**/*.iml
 
 **/src/generated/
