@@ -1,23 +1,80 @@
-<div class="jumbotron">
-  <h1>'Allo, 'Allo!</h1>
-  <p class="lead">
-    <img src="images/yeoman.png" alt="I'm Yeoman"><br>
-    Always a pleasure scaffolding your apps.
-  </p>
-  <p><a class="btn btn-lg btn-success" ng-href="#/">Splendid!<span class="glyphicon glyphicon-ok"></span></a></p>
-</div>
+<div class="row">
+  <div class="col-md-2">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">
+          Winkelmandjes
+        </h3>
+      </div>
+      <div class="panel-body">
+        <div class="row" style="margin-bottom: 15px;">
+          <div class="col-md-12">
+            <a class="btn btn-primary" ng-click="newShoppingCard()">
+              <i class="fa fa-plus"></i> Winkelmandje
+            </a>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <ul class="list-group" style="margin-bottom: 0;">
+              <li data-ng-repeat="card in cards" ng-click="setSelectedCard(card)" class="list-group-item">
+                {{card.name}}
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
 
-<div class="row marketing">
-  <h4>HTML5 Boilerplate</h4>
-  <p>
-    HTML5 Boilerplate is a professional front-end template for building fast, robust, and adaptable web apps or sites.
-  </p>
 
-  <h4>Angular</h4>
-  <p>
-    AngularJS is a toolset for building the framework most suited to your application development.
-  </p>
+  </div>
+  <div class="col-md-8">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">
+          <input type="text" class="form-control" data-ng-model="selectedCard.name"/>
+        </h3>
+      </div>
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-md-12">
+            <ul class="list-group" style="margin-bottom: 0;">
+              <li data-ng-repeat="item in selectedCard.items" ng-click="removeItem(item)" class="list-group-item">
+                {{item.name}}
+                <i class="fa fa-close pull-right"></i>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="panel-footer">
+        <div class="row">
+          <a class="btn btn-primary" data-ng-click="checkout()">Checkout</a>
+        </div>
+      </div>
+    </div>
 
-  <h4>Karma</h4>
-  <p>Spectacular Test Runner for JavaScript.</p>
+
+  </div>
+  <div class="col-md-2">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">
+          Items
+        </h3>
+      </div>
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-md-12">
+            <ul class="list-group" style="margin-bottom: 0;">
+              <li data-ng-repeat="item in items" ng-click="addItem(item)" class="list-group-item">
+                {{item.name}}
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
 </div>
