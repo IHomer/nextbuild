@@ -1,8 +1,8 @@
 package nl.ihomer.nextbuild.backend.view.handlers;
 
+import nl.ihomer.nextbuild.backend.domain.events.ShoppingCartRegisteredEvent;
 import nl.ihomer.nextbuild.backend.view.persistence.ShoppingCartEntity;
 import nl.ihomer.nextbuild.backend.view.persistence.ShoppingCartEntityRepository;
-import nl.ihomer.nextbuild.backend.domain.events.ShoppingCartRegisteredEvent;
 import org.axonframework.eventhandling.annotation.EventHandler;
 import org.axonframework.eventhandling.annotation.Timestamp;
 import org.joda.time.DateTime;

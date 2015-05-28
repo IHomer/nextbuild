@@ -1,5 +1,6 @@
 package nl.ihomer.nextbuild.backend.view.persistence;
 
+import nl.ihomer.nextbuild.backend.api.model.ShoppingCart;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.Entity;
@@ -12,45 +13,31 @@ import java.util.UUID;
  */
 
 @Entity
-public class ShoppingCartEntity {
-
-    private UUID id;
-    private String name;
-    private LocalDateTime registrationTimestamp;
+public class ShoppingCartEntity extends ShoppingCart {
 
 
     public ShoppingCartEntity() {
     }
 
     public ShoppingCartEntity(UUID id, String name, LocalDateTime registrationTimestamp) {
-        this.id = id;
-        this.name = name;
-        this.registrationTimestamp = registrationTimestamp;
+        super();
+        super.setId(id);
+        super.setName(name);
+        super.setRegistrationTimestamp(registrationTimestamp);
     }
 
     @Id
     @Type(type = "uuid-char")
     public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
+        return super.getId();
     }
 
     public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+        return super.getName();
     }
 
     public LocalDateTime getRegistrationTimestamp() {
-        return registrationTimestamp;
+        return super.getRegistrationTimestamp();
     }
 
-    public void setRegistrationTimestamp(LocalDateTime registrationTimestamp) {
-        this.registrationTimestamp = registrationTimestamp;
-    }
 }

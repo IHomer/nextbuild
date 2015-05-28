@@ -15,18 +15,13 @@ import org.axonframework.eventhandling.*;
 import org.axonframework.eventhandling.annotation.AnnotationEventListenerBeanPostProcessor;
 import org.axonframework.eventhandling.replay.DiscardingIncomingMessageHandler;
 import org.axonframework.eventhandling.replay.ReplayingCluster;
-import org.axonframework.eventhandling.scheduling.EventScheduler;
-import org.axonframework.eventhandling.scheduling.quartz.QuartzEventScheduler;
 import org.axonframework.eventsourcing.EventSourcingRepository;
 import org.axonframework.eventstore.EventStore;
 import org.axonframework.eventstore.jpa.JpaEventStore;
 import org.axonframework.saga.spring.SpringResourceInjector;
 import org.axonframework.unitofwork.SpringTransactionManager;
-import org.quartz.Scheduler;
-import org.quartz.SchedulerException;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
 
 import javax.persistence.EntityManager;
@@ -35,7 +30,6 @@ import javax.sql.DataSource;
 import java.sql.SQLException;
 import java.util.Collections;
 import java.util.Map;
-import java.util.Properties;
 
 /**
  * @author bvangameren
