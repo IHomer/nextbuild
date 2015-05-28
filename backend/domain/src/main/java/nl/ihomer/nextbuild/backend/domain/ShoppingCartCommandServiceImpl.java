@@ -3,6 +3,7 @@ package nl.ihomer.nextbuild.backend.domain;
 import nl.ihomer.nextbuild.backend.api.ShoppingCartCommandService;
 import nl.ihomer.nextbuild.backend.domain.commands.*;
 import org.axonframework.commandhandling.gateway.CommandGateway;
+import org.axonframework.eventhandling.replay.ReplayingCluster;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

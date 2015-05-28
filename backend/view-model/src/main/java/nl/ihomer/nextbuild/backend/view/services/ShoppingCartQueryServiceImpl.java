@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Created by bvangameren on 26/05/15.
@@ -23,5 +24,10 @@ public class ShoppingCartQueryServiceImpl implements ShoppingCartQueryService {
         List<ShoppingCart> carts = new ArrayList<>();
         carts.addAll(shoppingCartEntityRepository.findAll());
         return carts;
+    }
+
+    @Override
+    public ShoppingCart findOne(UUID id) {
+        return shoppingCartEntityRepository.findOne(id);
     }
 }

@@ -37,14 +37,14 @@ public class ShoppingCartResource {
     @RequestMapping(value = "/{id}/add", method = RequestMethod.PUT)
     public ResponseEntity<?> addShoppingCartItem(@PathVariable UUID id, @RequestBody ShoppingCartItemRequest request) {
         LOG.debug("Add shopping cart item");
-        shoppingCartCommandService.addShoppingCartItem(id, request.getItem());
+        shoppingCartCommandService.addShoppingCartItem(id, request.getName());
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @RequestMapping(value = "/{id}/remove", method = RequestMethod.PUT)
     public ResponseEntity<?> removeShoppingCartItem(@PathVariable UUID id, @RequestBody ShoppingCartItemRequest request) {
         LOG.debug("Remove shopping cart item");
-        shoppingCartCommandService.removeShoppingCartItem(id, request.getItem());
+        shoppingCartCommandService.removeShoppingCartItem(id, request.getName());
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
@@ -81,5 +81,12 @@ public class ShoppingCartResource {
         LOG.debug("List shopping carts");
         List<ShoppingCart> carts = shoppingCartQueryService.findAll();
         return new ResponseEntity<>(carts, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public ResponseEntity<?> getShoppingCart(@PathVariable UUID id) {
+        LOG.debug("Find shopping cart");
+        ShoppingCart cart = shoppingCartQueryService.findOne(id);
+        return new ResponseEntity<>(cart, HttpStatus.OK);
     }
 }

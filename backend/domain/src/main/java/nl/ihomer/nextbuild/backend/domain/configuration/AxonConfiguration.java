@@ -76,7 +76,7 @@ public class AxonConfiguration {
 
     @Bean
     public ClusterSelector clusterSelector(Cluster replayingCluster){
-        Map<String, Cluster> mapping = Collections.singletonMap("nl.ihomer.nextbuild.backend.view.handlers", replayingCluster);
+        Map<String, Cluster> mapping = Collections.singletonMap("nl.ihomer.nextbuild.backend.report.handlers", replayingCluster);
         return new ClassNamePrefixClusterSelector(mapping, new SimpleCluster("Default"));
     }
 

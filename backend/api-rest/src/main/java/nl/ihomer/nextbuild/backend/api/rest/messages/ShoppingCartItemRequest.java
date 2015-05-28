@@ -5,9 +5,9 @@ package nl.ihomer.nextbuild.backend.api.rest.messages;
  */
 public class ShoppingCartItemRequest {
 
-    private String item;
+    private String name;
 
-    public String getItem() {
-        return item;
+    public String getName() {
+        return name;
     }
 }
