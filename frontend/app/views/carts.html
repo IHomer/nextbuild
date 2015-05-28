@@ -3,22 +3,27 @@
     <div class="panel panel-default">
       <div class="panel-heading">
         <h3 class="panel-title">
-          Winkelmandjes
+          Carts
         </h3>
       </div>
       <div class="panel-body">
         <div class="row" style="margin-bottom: 15px;">
           <div class="col-md-12">
-            <a class="btn btn-primary" ng-click="newShoppingCard()">
-              <i class="fa fa-plus"></i> Winkelmandje
+            <input type="text" class="form-control" data-ng-model="name" />
+          </div>
+        </div>
+        <div class="row" style="margin-bottom: 15px;">
+          <div class="col-md-12">
+            <a class="btn btn-primary" ng-click="registerShoppingCart()">
+              <i class="fa fa-plus"></i> Cart
             </a>
           </div>
         </div>
         <div class="row">
           <div class="col-md-12">
             <ul class="list-group" style="margin-bottom: 0;">
-              <li data-ng-repeat="card in cards" ng-click="setSelectedCard(card)" class="list-group-item">
-                {{card.name}}
+              <li data-ng-repeat="cart in carts | orderBy:'name'" ng-click="selectShoppingCart(cart)" class="list-group-item">
+                {{cart.name}}
               </li>
             </ul>
           </div>
@@ -32,14 +37,14 @@
     <div class="panel panel-default">
       <div class="panel-heading">
         <h3 class="panel-title">
-          <input type="text" class="form-control" data-ng-model="selectedCard.name"/>
+          {{selectedCart.name}} | {{selectedCart.state}}
         </h3>
       </div>
       <div class="panel-body">
         <div class="row">
           <div class="col-md-12">
             <ul class="list-group" style="margin-bottom: 0;">
-              <li data-ng-repeat="item in selectedCard.items" ng-click="removeItem(item)" class="list-group-item">
+              <li data-ng-repeat="item in selectedCart.items | orderBy:'name'" ng-click="removeItem(item)" class="list-group-item">
                 {{item.name}}
                 <i class="fa fa-close pull-right"></i>
               </li>
@@ -50,6 +55,9 @@
       <div class="panel-footer">
         <div class="row">
           <a class="btn btn-primary" data-ng-click="checkout()">Checkout</a>
+          <a class="btn btn-primary" data-ng-click="cancel()">Cancel</a>
+          <a class="btn btn-primary" data-ng-click="accept()">Accept</a>
+          <a class="btn btn-primary" data-ng-click="reject()">Reject</a>
         </div>
       </div>
     </div>

@@ -1,0 +1,43 @@
+<div class="row">
+  <div class="col-md-2">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">
+          Report
+        </h3>
+      </div>
+      <div class="panel-body">
+        <div class="row" style="margin-bottom: 15px;">
+          <div class="col-md-12">
+            <a class="btn btn-primary" data-ng-click="generateReport()">Replay</a>
+          </div>
+        </div>
+        <div class="row" style="margin-bottom: 15px;">
+          <div class="col-md-12">
+            <a class="btn btn-primary" data-ng-click="getReports()">Fetch</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-10">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">
+          Removed Items
+        </h3>
+      </div>
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-md-12">
+            <ul class="list-group" style="margin-bottom: 0;">
+              <li data-ng-repeat="item in items | orderBy:'name'" class="list-group-item">
+                {{item.name}} | {{item.timestamp.hour}}:{{item.timestamp.minute}}:{{item.timestamp.second}}
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
